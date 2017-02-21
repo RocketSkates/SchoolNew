@@ -5,7 +5,7 @@ int sum(unsigned int i) {
 	if (i <= 9) {
 		return i;
 	}
-	return i + sum(i/10);
+	return i%10 + sum(i/10);
 }
 
 int  main() {
