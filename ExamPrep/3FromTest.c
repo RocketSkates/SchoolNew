@@ -35,7 +35,7 @@ int addMovieToCountry(country* country, movie* movie) {
 
 	if (searchMovieByCountry(country, movie) == NULL) {
 		country->_moviesSetLen++;
-		country->_moviesSet = (movie**)realloc(sizeof(movie*), ++(c->_moviesSetLen));
+		country->_moviesSet = (movie**)realloc(movie*, ++(c->_moviesSetLen));
 		if (country->_moviesSet == NULL) return 0;
 	}
 	else return 1;
