@@ -112,12 +112,36 @@ bool MyDate::isBefore(const MyDate& newDate) {
 }
 
 int MyDate::delay(int num) {
+	int months = 0, days = 0;
+	bool passesFeb = false;
 	if (num > 358 || num < 0) return -1;
 	else {
-
+		months = num / 30;
+		days = num % 30;
+		if ((this->m_month == 1 && months > 1) || (this->m_month == 2 && months > 0)) {
+			passesFeb = true;
+			// If the number of days that we add to the current date will cause to pass a month (also for February case)
+			if ((this->m_month != 2 && this->m_day + days > 30) || (this->m_month == 2 && this->m_day + days > 28)) {
+				int temp = (this->m_day + days) - 30;
+				if (passesFeb) this->setDay(temp + 2);
+				else this->setDay(temp);
+				this->setMonth(this->m_month + months + 1);
+			}
+			else { // If the number of days to add will not change the month, change regularly.
+				this->setMonth(this->m_month + months);
+				this->setDay(this->m_month + months);
+			}
+			// If the number of months to add will cause the date to move to the next year.
+			if ((this->m_month + months) > 12) this->setYear(this->m_year + 1);
+		}
 	}
 }
 
-MyDate::~MyDate()
-{
+int MyDate::bringForward(int num) {
+	int months = 0, days = 0;
+	bool passesFeb = false;
+	if (num > 358 || num < 0) return -1;
+
+
 }
+

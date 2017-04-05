@@ -20,6 +20,6 @@ public:
 	char* print();
 
 
-	~MyDate() {};
+	//~MyDate() {};
 };
 
