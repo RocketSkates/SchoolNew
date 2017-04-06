@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "MyDate.h"
-
+#include <cmath>
 
 MyDate::MyDate(){
 	m_day = 0;
@@ -118,30 +118,52 @@ int MyDate::delay(int num) {
 	else {
 		months = num / 30;
 		days = num % 30;
-		if ((this->m_month == 1 && months > 1) || (this->m_month == 2 && months > 0)) {
-			passesFeb = true;
-			// If the number of days that we add to the current date will cause to pass a month (also for February case)
-			if ((this->m_month != 2 && this->m_day + days > 30) || (this->m_month == 2 && this->m_day + days > 28)) {
-				int temp = (this->m_day + days) - 30;
-				if (passesFeb) this->setDay(temp + 2);
-				else this->setDay(temp);
-				this->setMonth(this->m_month + months + 1);
-			}
-			else { // If the number of days to add will not change the month, change regularly.
-				this->setMonth(this->m_month + months);
-				this->setDay(this->m_month + months);
-			}
-			// If the number of months to add will cause the date to move to the next year.
-			if ((this->m_month + months) > 12) this->setYear(this->m_year + 1);
+		// Keep a flag for if the delay will pass February
+		if ((this->m_month == 1 && months > 1) || (this->m_month == 2 && months > 0)) passesFeb = true;
+		// If the number of days that we add to the current date will cause to pass a month (also for February case)
+		if ((this->m_month != 2 && this->m_day + days > 30) || (this->m_month == 2 && this->m_day + days > 28)) {
+			int temp = (this->m_day + days) - 30;
+			if (passesFeb) this->setDay(temp + 2);
+			else this->setDay(temp);
+			this->setMonth(this->m_month + months + 1);
 		}
+		else { // If the number of days to add will not change the month, change regularly.
+			this->setMonth(this->m_month + months);
+			this->setDay(this->m_month + months);
+		}
+		// If the number of months to add will cause the date to move to the next year.
+		if ((this->m_month + months) > 12) this->setYear(this->m_year + 1);
 	}
 }
 
 int MyDate::bringForward(int num) {
-	int months = 0, days = 0;
+	int months = 0, days = 0, after = 0;
 	bool passesFeb = false;
 	if (num > 358 || num < 0) return -1;
-
+	else {
+		months = num / 30;
+		days = num % 30;
+		after = this->m_month - months; 
+		if (after<2) passesFeb = true;
+		if (after < 0) {// This means the month is less than January after we deduct the months and we have to go a year back!
+			after = std::abs(after);
+			this->setYear(this->m_year - 1);
+			this->setMonth(12 - after);
+		}
+		// If the days to deduct will cause to switch a month
+		if ((this->m_month != 2 && (30-this->m_day-days<0)) || (this->m_month == 2 && (28 - this->m_day - days<0))) {
+			int temp = std::abs(30 - this->m_day - days);
+			if (passesFeb) this->setDay(28-temp);
+			else this->setDay(30-temp);
+			this->setMonth(this->m_month + months + 1);
+		}
+		else { // If the number of days to add will not change the month, change regularly.
+			this->setMonth(this->m_month + months);
+			this->setDay(this->m_month + months);
+		}
+		// If the number of months to add will cause the date to move to the next year.
+		if ((this->m_month + months) > 12) this->setYear(this->m_year + 1);
+	}
 
 }
 
