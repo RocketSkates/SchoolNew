@@ -1,4 +1,9 @@
 #pragma once
+#include <iostream>
+
+
+using namespace std;
+
 class MyDate
 {
 	int m_day;
@@ -14,11 +19,14 @@ public:
 	int setDay(int day);
 	int setMonth(int month);
 	int setYear(int year);
+	int getDay();
+	int getMonth();
+	int getYear();
 	bool isBefore(const MyDate& newDate);
 	int delay(int num);
 	int bringForward(int num);
 	char* print();
-
+	char* strdup(const char* s);
 
 	//~MyDate() {};
 };
