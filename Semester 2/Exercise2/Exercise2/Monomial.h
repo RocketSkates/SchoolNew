@@ -11,9 +11,13 @@ public:
     Monomial();
 	int GetExp() const { return expo; }
 	int GetCoeff() const { return coef; }
-    friend std::ostream& operator << (std::ostream& out, const Monomial& m);
-    operator += (const Monomial& m)
+	bool operator += (const Monomial& m);
+	Monomial operator * (const Monomial& m);
+	Monomial& operator *= (const Monomial& m);
+	Monomial& operator == (const Monomial& m);
+	Monomial& operator -- ();
     char* stringRepresentation() const;
+	friend std::ostream& operator << (std::ostream& out, const Monomial& m);
 };
 
 std::ostream& operator << (std::ostream& out, const Monomial& m);
