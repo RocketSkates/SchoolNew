@@ -1,6 +1,7 @@
 #include "Monomial.h"
 
 #include <string>
+#include <cstring>
 #include <stdlib.h>
 #include <sstream>
 #include <cstring>
@@ -15,6 +16,7 @@ namespace patch
 	}
 }
 
+using namespace std;
 
 Monomial::Monomial() {
 	coef = 0;
@@ -65,20 +67,20 @@ char* Monomial::stringRepresentation() const {
 	}
 	else if (expo == 1) {
 		const char* temp = patch::to_string(coef).c_str();
-		char* temp1 = strcpy(temp1, temp); // Workaround for c_str returning const
-		strcpy(newStr, strcat(temp1,"x")); 
+		//char* temp1 = strcpy(temp1, temp); // Workaround for c_str returning const
+		strcpy(newStr, strcat((char*)temp,"x"));
 	}
 	else if (coef == 1) {
 		const char* temp = patch::to_string(expo).c_str();
-		strcpy(newStr, strcat("x^", temp)); 
+		strcpy(newStr, strcat((char*)"x^", (char*)temp));
 	}
 	else {
 		const char* temp = patch::to_string(coef).c_str();
-		char* temp1 = strcpy(temp1, temp); // Workaround for c_str returning const
-		strcpy(newStr, strcat(temp1, "x^")); 
+		//char* temp1 = strcpy(temp1, temp); // Workaround for c_str returning const
+		strcpy(newStr, strcat((char*)temp, "x^"));
 		temp = patch::to_string(expo).c_str();
-		char* temp1 = strcpy(temp1, temp); // Workaround for c_str returning const
-		strcpy(newStr, strcat(newStr, temp1));
+		//temp1 = strcpy(temp1, temp); // Workaround for c_str returning const
+		strcpy(newStr, strcat(newStr, (char*)temp));
 	}
 	return newStr;
 }
