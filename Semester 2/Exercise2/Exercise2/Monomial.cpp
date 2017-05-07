@@ -45,7 +45,7 @@ Monomial& Monomial::operator *= (const Monomial& m) {
 	return *this;
 }
 
-Monomial& Monomial::operator == (const Monomial& m) {
+Monomial& Monomial::operator = (const Monomial& m) {
 	coef = m.GetCoeff();
 	expo = m.GetExp();
 	return *this;

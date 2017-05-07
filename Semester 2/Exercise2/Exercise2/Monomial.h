@@ -14,7 +14,7 @@ public:
 	bool operator += (const Monomial& m);
 	Monomial operator * (const Monomial& m);
 	Monomial& operator *= (const Monomial& m);
-	Monomial& operator == (const Monomial& m);
+	Monomial& operator = (const Monomial& m);
 	Monomial& operator -- ();
     char* stringRepresentation() const;
 	friend std::ostream& operator << (std::ostream& out, const Monomial& m);
