@@ -11,6 +11,7 @@ public:
     Monomial();
 	int GetExp() const { return expo; }
 	int GetCoeff() const { return coef; }
+	void SetCoeff(int n) { coef = n; }
 	bool operator += (const Monomial& m);
 	Monomial operator * (const Monomial& m);
 	Monomial& operator *= (const Monomial& m);
