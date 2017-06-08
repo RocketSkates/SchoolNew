@@ -18,7 +18,7 @@ public:
 	const char* getName() const { return _name; }
 	double getAge() const { return _age; }
 	bool getRadioactive() const { return _radioactive; }
-	void setName(const char* name) { _name = strdup(name); }
+	void setName(const char* name);
 	void setAge(double age) { _age = age; }
 	void setRadioactive(bool radioactive) { _radioactive = radioactive; }
 

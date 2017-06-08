@@ -10,11 +10,11 @@ class AnimalBasedSuperHero :
 public:
 	AnimalBasedSuperHero() :SuperHero() { _animal = nullptr; }
 	AnimalBasedSuperHero(const char* name, double age, bool radioactive, const char* animal);
-	AnimalBasedSuperHero(const char* animal) :SuperHero() { _animal = strdup(animal); }
+	AnimalBasedSuperHero(const char* animal) :SuperHero() { setAnimal(animal); }
 	AnimalBasedSuperHero(const AnimalBasedSuperHero& animalBasedSuperHero);
 	virtual ~AnimalBasedSuperHero();
 
-	void setAnimal(const char* animal) { _animal = strdup(animal); }
+	void setAnimal(const char* animal);
 	const char* getAnimal() const { return _animal; }
 
 	virtual void load(ifstream& in_file);

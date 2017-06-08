@@ -5,14 +5,14 @@
 class CaptainAmerica : public ProfessionBasedSuperHero
 {
 public:
-	CaptainAmerica();
+	CaptainAmerica() :ProfessionBasedSuperHero() { _ageIncludingFreezing = 0; }
 	CaptainAmerica(const char* name, double age, bool radioactive, const char* profession, int yearsExperience, double ageIncludingFreezing);
 	CaptainAmerica(const char* profession, int yearsExperience, double ageIncludingFreezing);
 	CaptainAmerica(double ageIncludingFreezing);
 	CaptainAmerica(const CaptainAmerica& captainAmerica);
 	virtual ~CaptainAmerica();
 
-	double getAgeIncludingFreezing() const;
+	double getAgeIncludingFreezing() const { return _ageIncludingFreezing; }
 	void setAgeIncludingFreezing(double ageIncludingFreezing);
 
 	virtual void load(ifstream& in_file);

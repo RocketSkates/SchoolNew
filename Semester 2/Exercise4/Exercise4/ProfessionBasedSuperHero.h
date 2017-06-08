@@ -13,7 +13,7 @@ public:
 	void setProfession(const char* profession);
 	const char* getProfession() const { return _profession; }
 	void setYearsExperience(int yearsExperience);
-	int getYearsExperience() const;
+	int getYearsExperience() const { return _yearsExperience; }
 
 	virtual void load(ifstream& in_file);
 	virtual void save(ofstream& out_file) const;
